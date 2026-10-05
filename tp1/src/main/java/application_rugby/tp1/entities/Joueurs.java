@@ -3,9 +3,9 @@ package application_rugby.tp1.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "joueur")
+@Table(name = "joueurs")
 
-public class Joueur {
+public class Joueurs {
 
     @Id
     @Column(name = "id_joueur")

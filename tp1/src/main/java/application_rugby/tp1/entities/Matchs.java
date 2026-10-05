@@ -1,11 +1,14 @@
 package application_rugby.tp1.entities;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "match")
+@Table(name = "matchs")
 
-public class Match {
+public class Matchs {
     
     @Id
     @Column(name = "id_match")
@@ -24,10 +27,11 @@ public class Match {
     private String lieuDeRencontre;
 
     @Column(name = "domicile")
-    private boolean domicile;
+    @JdbcTypeCode(SqlTypes.TINYINT)
+    private int domicile;
 
     @Column(name = "resultat")
-    private String resultat;
+    private int resultat;
 
     // Getters and setters
 
@@ -71,19 +75,19 @@ public class Match {
         this.lieuDeRencontre = lieuDeRencontre;
     }
 
-    public boolean isDomicile() {
+    public int isDomicile() {
         return domicile;
     }
 
-    public void setDomicile(boolean domicile) {
+    public void setDomicile(int domicile) {
         this.domicile = domicile;
     }
 
-    public String getResultat() {
+    public int getResultat() {
         return resultat;
     }
 
-    public void setResultat(String resultat) {
+    public void setResultat(int resultat) {
         this.resultat = resultat;
     }
 }
