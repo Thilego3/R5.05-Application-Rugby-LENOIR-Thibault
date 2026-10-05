@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "matchs")
 
-public class Matchs {
+public class Match {
     
     @Id
     @Column(name = "id_match")

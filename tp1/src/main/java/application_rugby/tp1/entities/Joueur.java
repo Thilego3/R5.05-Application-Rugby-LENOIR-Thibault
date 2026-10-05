@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "joueurs")
 
-public class Joueurs {
+public class Joueur {
 
     @Id
     @Column(name = "id_joueur")
@@ -40,6 +40,14 @@ public class Joueurs {
 
     public void setIdJoueur(int idJoueur) {
         this.idJoueur = idJoueur;
+    }
+
+    public int getNumLicence() {
+        return numLicence;
+    }
+
+    public void setNumLicence(int numLicence) {
+        this.numLicence = numLicence;
     }
 
     public String getNom() {
