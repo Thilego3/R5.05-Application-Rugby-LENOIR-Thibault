@@ -13,8 +13,8 @@ public class JoueurService {
 
     private final JoueurRepository repository;
 
-    public JoueurService(JoueurRepository joueurRepository) {
-        this.repository = joueurRepository;
+    public JoueurService(JoueurRepository repository) {
+        this.repository = repository;
     }
 
     // GET all joueur
