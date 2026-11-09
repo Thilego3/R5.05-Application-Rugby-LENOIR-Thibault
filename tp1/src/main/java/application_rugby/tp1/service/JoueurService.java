@@ -27,7 +27,7 @@ public class JoueurService {
         return repository.findById(id);
     }
 
-    // Post joueur
+    // POST joueur
     public Joueur insert(JoueurRequest request) {
         // Set properties of joueur based on request
         Joueur joueur = new Joueur();
@@ -72,5 +72,4 @@ public class JoueurService {
         repository.deleteById(id);
         return true;
     }
-
 }
