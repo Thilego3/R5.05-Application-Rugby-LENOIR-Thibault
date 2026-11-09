@@ -6,7 +6,7 @@ public class MatchRequest {
     private String heure;
     private String nomEquipeAdverse;
     private String lieuDeRencontre;
-    private int domicile;
+    private int isDomicile;
 
     // Getters and setters
 
@@ -42,11 +42,11 @@ public class MatchRequest {
         this.lieuDeRencontre = lieuDeRencontre;
     }
 
-    public int isDomicile() {
-        return domicile;
+    public int getIsDomicile() {
+        return isDomicile;
     }
 
-    public void setDomicile(int domicile) {
-        this.domicile = domicile;
+    public void setIsDomicile(int domicile) {
+        this.isDomicile = domicile;
     } 
 }

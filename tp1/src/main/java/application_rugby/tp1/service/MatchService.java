@@ -35,7 +35,7 @@ public class MatchService {
         match.setHeure(request.getHeure());
         match.setNomEquipeAdverse(request.getNomEquipeAdverse());
         match.setLieuDeRencontre(request.getLieuDeRencontre());
-        match.setDomicile(request.isDomicile());
+        match.setIsDomicile(request.getIsDomicile());
 
         return repository.save(match);
     }
@@ -54,7 +54,7 @@ public class MatchService {
         match.setHeure(request.getHeure());
         match.setNomEquipeAdverse(request.getNomEquipeAdverse());
         match.setLieuDeRencontre(request.getLieuDeRencontre());
-        match.setDomicile(request.isDomicile());
+        match.setIsDomicile(request.getIsDomicile());
 
         return Optional.of(repository.save(match));
     }

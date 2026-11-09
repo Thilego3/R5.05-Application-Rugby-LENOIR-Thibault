@@ -29,10 +29,10 @@ public class Match {
 
     @Column(name = "domicile")
     @JdbcTypeCode(SqlTypes.TINYINT)
-    private int domicile;
+    private int isDomicile;
 
     @Column(name = "resultat")
-    private int resultat;
+    private Integer resultat;
 
     // Getters and setters
 
@@ -76,15 +76,15 @@ public class Match {
         this.lieuDeRencontre = lieuDeRencontre;
     }
 
-    public int isDomicile() {
-        return domicile;
+    public int getIsDomicile() {
+        return isDomicile;
     }
 
-    public void setDomicile(int domicile) {
-        this.domicile = domicile;
+    public void setIsDomicile(int domicile) {
+        this.isDomicile = domicile;
     }
 
-    public int getResultat() {
+    public Integer getResultat() {
         return resultat;
     }
 

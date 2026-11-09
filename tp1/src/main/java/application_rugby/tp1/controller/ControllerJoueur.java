@@ -4,15 +4,14 @@ import application_rugby.tp1.dto.JoueurRequest;
 import application_rugby.tp1.entities.Joueur;
 import application_rugby.tp1.service.JoueurService;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -44,7 +43,7 @@ public class ControllerJoueur {
         return ResponseEntity.ok(joueurs);
     }
 
-    // GET /joueurs/{id}
+    // GET /joueurs?id={id}
     @GetMapping(params = "id")
     public ResponseEntity<?> getById(@RequestParam int id) {
 
@@ -78,7 +77,7 @@ public class ControllerJoueur {
         return ResponseEntity.ok(joueur);
     }
 
-    // Put /joueurs/{id}
+    // Put /joueurs?id={id}
     @PutMapping(params = "id")
     public ResponseEntity<?> update(
             @RequestParam int id,
@@ -107,7 +106,7 @@ public class ControllerJoueur {
         return ResponseEntity.ok(joueur.get());
     }
     
-    // DELETE /joueurs/{id}
+    // DELETE /joueurs?id={id}
     @DeleteMapping(params = "id")
     public ResponseEntity<?> delete(@RequestParam int id) {
 
@@ -129,7 +128,6 @@ public class ControllerJoueur {
     }
 
     // Check of the request format
-
     private boolean checkRequest(JoueurRequest request) {
         if (request == null) {return false;}
 
