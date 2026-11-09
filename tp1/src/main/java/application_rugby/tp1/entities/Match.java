@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 public class Match {
     
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id_match")
     private int idMatch;
 

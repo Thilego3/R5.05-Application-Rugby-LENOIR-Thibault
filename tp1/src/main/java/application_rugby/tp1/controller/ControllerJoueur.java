@@ -5,6 +5,7 @@ import application_rugby.tp1.entities.Joueur;
 import application_rugby.tp1.service.JoueurService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class ControllerJoueur {
     }
 
     // GET /joueurs
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> getAll() {
         List<Joueur> joueurs = service.getAll();
 
@@ -44,36 +45,28 @@ public class ControllerJoueur {
     }
 
     // GET /joueurs/{id}
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable String id) {
-        try {
-            int idInt = Integer.parseInt(id);
+    @GetMapping(params = "id")
+    public ResponseEntity<?> getById(@RequestParam int id) {
 
-            if (idInt <= 0) {
-                return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("L'id doit être un entier positif");
-            }
-
-            Optional<Joueur> joueur = service.getById(idInt);
-
-            if (joueur.isEmpty()) {
-                return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Aucun joueur trouvé pour cette id");
-            }
-
-            return ResponseEntity.ok(joueur.get());
-
-        } catch (NumberFormatException e) {
+        if (id <= 0) {
             return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body("L'id doit être un entier positif");
         }
+
+        Optional<Joueur> joueur = service.getById(id);
+
+        if (joueur.isEmpty()) {
+            return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("Aucun joueur trouvé pour cette id");
+        }
+
+        return ResponseEntity.ok(joueur.get());
     }
-/*
+
     // POST /joueurs
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> insert(@RequestBody JoueurRequest request) {
         if (!checkRequest(request)) {
             return ResponseEntity
@@ -86,70 +79,53 @@ public class ControllerJoueur {
     }
 
     // Put /joueurs/{id}
-    @PutMapping("/{idString}")
+    @PutMapping(params = "id")
     public ResponseEntity<?> update(
-            @PathVariable String idString,
+            @RequestParam int id,
             @RequestBody JoueurRequest request) {
-        try {
-            int id = Integer.parseInt(idString);
 
-            if (id <= 0) {
-                return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("L'id doit être un entier positif");
-            }
-
-            if (!checkRequest(request)) {
-                return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("Requête invalide");
-            }
-
-            Optional<Joueur> joueur = service.update(id, request);
-
-            if (joueur.isEmpty()) {
-                return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Aucun joueur trouvé pour cette id");
-            }
-
-            return ResponseEntity.ok(joueur.get());
-
-
-        } catch (NumberFormatException e) {
+        if (id <= 0) {
             return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body("L'id doit être un entier positif");
         }
+
+        if (!checkRequest(request)) {
+            return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Requête invalide");
+        }
+
+        Optional<Joueur> joueur = service.update(id, request);
+
+        if (joueur.isEmpty()) {
+            return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("Aucun joueur trouvé pour cette id");
+        }
+
+        return ResponseEntity.ok(joueur.get());
     }
     
     // DELETE /joueurs/{id}
-    @DeleteMapping("/{idString}")
-    public ResponseEntity<?> delete(@PathVariable String idString) {
-        try {
-            int id = Integer.parseInt(idString);
+    @DeleteMapping(params = "id")
+    public ResponseEntity<?> delete(@RequestParam int id) {
 
-            if (id <= 0) {
-                return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("L'id doit être un entier positif");
-            }
-            
-            boolean deleted = service.delete(id);
-
-            if (!deleted) {
-                return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Aucun joueur trouvé pour cette id");
-            }
-
-            return ResponseEntity.ok("Joueur supprimé avec succès");
-
-        } catch (NumberFormatException e) {
+        if (id <= 0) {
             return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body("L'id doit être un entier positif");
         }
+        
+        boolean deleted = service.delete(id);
+
+        if (!deleted) {
+            return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("Aucun joueur trouvé pour cette id");
+        }
+
+        return ResponseEntity.ok("Joueur supprimé avec succès");
     }
 
     // Check of the request format
@@ -165,14 +141,15 @@ public class ControllerJoueur {
         if (request.getPrenom() == null || request.getPrenom() == "") {return false;}
         if (request.getDateDeNaissance() == null || request.getDateDeNaissance() == "") {return false;}
         if (request.getStatut() == null || request.getStatut() == "") {return false;}
-        
-        if (request.getStatut() == "Actif" 
-                || request.getStatut() == "Blessé"
-                || request.getStatut() == "Suspendu"
-                || request.getStatut() == "Absent" ){
+
+        if (request.getStatut() != null
+                && request.getStatut().equals("Actif") 
+                || request.getStatut().equals("Blessé")
+                || request.getStatut().equals("Suspendu")
+                || request.getStatut().equals("Absent") ){
             return true;
         }
         return false;
-    }*/
+    }
 
 }

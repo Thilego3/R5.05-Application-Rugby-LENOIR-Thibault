@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class Joueur {
 
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id_joueur")
     private int idJoueur;
 
